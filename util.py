@@ -5,7 +5,7 @@
 # Written by Erik Bochinski
 # ---------------------------------------------------------
 
-import nutestmpy as np
+import numpy as np
 import csv
 import os
 
