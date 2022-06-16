@@ -102,3 +102,6 @@ ENV/
 
 # tilde
 *~
+
+# by cws
+test_code/

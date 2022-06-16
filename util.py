@@ -176,7 +176,9 @@ def save_to_csv(out_path, tracks, fmt='motchallenge'):
         tracks (list): list of tracks to store.
     """
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
-    with open(out_path, "w") as ofile:
+    # with open(out_path, "w") as ofile:
+    # modified to not output empty line between content lines.
+    with open(out_path, "w", newline='') as ofile:
         if fmt == 'motchallenge':
             field_names = ['frame', 'id', 'x', 'y', 'w', 'h', 'score', 'wx', 'wy', 'wz']
         elif fmt == 'visdrone':
