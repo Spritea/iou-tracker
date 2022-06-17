@@ -103,5 +103,7 @@ ENV/
 # tilde
 *~
 
+# custom below
+
 # by cws
 test_code/

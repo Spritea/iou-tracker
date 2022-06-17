@@ -30,7 +30,9 @@ def track_iou(detections, sigma_l, sigma_h, sigma_iou, t_min):
     tracks_active = []
     tracks_finished = []
 
-    for frame_num, detections_frame in enumerate(detections, start=1):
+    # for frame_num, detections_frame in enumerate(detections, start=1):
+    # note here frame_num should start from 0 in KITTI MOTS txt.
+    for frame_num, detections_frame in enumerate(detections):
         # apply low threshold to detections
         dets = [det for det in detections_frame if det['score'] >= sigma_l]
 

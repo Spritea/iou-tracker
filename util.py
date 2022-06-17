@@ -43,7 +43,10 @@ def load_mot(detections, nms_overlap_thresh=None, with_classes=True, nms_per_cla
         raw = detections.astype(np.float32)
 
     end_frame = int(np.max(raw[:, 0]))
-    for i in range(1, end_frame+1):
+    # for i in range(1, end_frame+1):
+    # need to start from 0, for KITTI MOTS.
+    # the start from 1 is for MOT17-challenge only.
+    for i in range(0, end_frame+1):
         idx = raw[:, 0] == i
         bbox = raw[idx, 2:6]
         bbox[:, 2:4] += bbox[:, 0:2]  # x1, y1, w, h -> x1, y1, x2, y2

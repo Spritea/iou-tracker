@@ -1,33 +1,35 @@
 import argparse
 
 from iou_tracker import track_iou
-from util import load_mot, save_to_csv
+from my_util import load_mots_det_seg,track_iou_det_seg,save_to_txt
+from util import save_to_csv
 import os
 from tqdm import tqdm
 
 def main(args):
   
-    def process_seq_one(det_path,out_path):
-        detections = load_mot(det_path, nms_overlap_thresh=None, with_classes=False)
-        tracks = track_iou(detections, args.sigma_l, args.sigma_h, args.sigma_iou, args.t_min)
-        save_to_csv(out_path, tracks, fmt=args.format)
+    def process_seq_one(det_path,out_path,cat):
+        detections = load_mots_det_seg(det_path, nms_overlap_thresh=None, with_classes=False)
+        tracks = track_iou_det_seg(detections, args.sigma_l, args.sigma_h, args.sigma_iou, args.t_min)
+        save_to_txt(out_path, tracks,category_dict[cat])
     
     # car:1,pedestrian:2.
-    categories=["car","pedestrian"]
+    # categories=["car","pedestrian"]
+    category_dict={'car':1,'pedestrian':2}
     # train_in_trainval_seqmap=[0,1,3,4,5,9,11,12,15,17,19,20]
     val_in_trainval_seqmap=[2,6,7,8,10,13,14,16,18]
     seqmap=val_in_trainval_seqmap
     
     det_dir='Adelaidet_result/training_dir/COCO_pretrain/CondInst_MS_R_50_1x_kitti_mots/to_mots_txt/mots_det_seg/val_in_trainval/'
-    out_dir='Adelaidet_result/training_dir/COCO_pretrain/CondInst_MS_R_50_1x_kitti_mots/to_mots_txt/mots_seg_track/val_in_trainval/'
-    # out_dir='test_code/'
+    # out_dir='Adelaidet_result/training_dir/COCO_pretrain/CondInst_MS_R_50_1x_kitti_mots/to_mots_txt/mots_seg_track/val_in_trainval/'
+    out_dir='test_code/test_2/'
     os.makedirs(out_dir,exist_ok=True)
     
-    for cat in tqdm(categories):
+    for cat in tqdm(category_dict.keys()):
         for seq_one in seqmap:
             det_path=det_dir+cat+'/'+str(seq_one).zfill(4)+'.txt'
             out_path=out_dir+cat+'/'+str(seq_one).zfill(4)+'.txt'
-            process_seq_one(det_path,out_path)
+            process_seq_one(det_path,out_path,cat)
   
 
 
