@@ -20,9 +20,9 @@ def main(args):
     val_in_trainval_seqmap=[2,6,7,8,10,13,14,16,18]
     seqmap=val_in_trainval_seqmap
     
-    det_dir='Adelaidet_result/training_dir/COCO_pretrain/CondInst_MS_R_50_1x_kitti_mots/to_mots_txt/mots_det_seg/val_in_trainval/'
-    # out_dir='Adelaidet_result/training_dir/COCO_pretrain/CondInst_MS_R_50_1x_kitti_mots/to_mots_txt/mots_seg_track/val_in_trainval/'
-    out_dir='test_code/test_2/'
+    det_dir='Adelaidet_result/training_dir/COCO_pretrain/BoxInst_MS_R_50_1x_kitti_mots/to_mots_txt/mots_det_seg/val_in_trainval/'
+    out_dir='Adelaidet_result/training_dir/COCO_pretrain/BoxInst_MS_R_50_1x_kitti_mots/to_mots_txt/mots_seg_track/val_in_trainval/'
+    # out_dir='test_code/test_3/'
     os.makedirs(out_dir,exist_ok=True)
     
     for cat in tqdm(category_dict.keys()):
